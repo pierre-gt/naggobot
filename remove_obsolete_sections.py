@@ -4,7 +4,7 @@ import pywikibot
 
 def remove_obsolete_sections(wikicode, commons):
     aSauver = False
-    for section in wikicode.get_sections():
+    for section in wikicode.get_sections(levels=[2], matches="suppression sur Commons"):
         templates = section.filter_templates()
         for template in templates:
             nocat = True
