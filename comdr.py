@@ -3,6 +3,7 @@ import pywikibot, mwparserfromhell
 import hashlib, os
 from remove_obsolete_sections import remove_obsolete_sections
 cachePath='/home/naggobot/naggov3/.drcache/'
+listeCaches=set()
 commons=pywikibot.Site('commons','commons')
 frwiki=pywikibot.Site('fr')
 listDRtext='''{{bots|deny=CommonsDelinker}}\n {| class="wikitable alternance centre sortable"
@@ -40,8 +41,9 @@ def findusage(page, type):
 	return None, None, None
 
 def readDesc(page):
-	global cachePath
+	global cachePath, listeCaches
 	cacheFile=hashlib.sha1(page.title().encode('utf-8')).hexdigest()
+	listeCaches.add(cacheFile)
 	if os.path.isfile(cachePath+cacheFile):
 		print(page.title() + " en cache : " + cacheFile)
 		f=open(cachePath+cacheFile,'r')
@@ -171,3 +173,14 @@ listDRpage='Discussion utilisateur:NaggoBot/CommonsDR'
 
 pagecible=pywikibot.Page(frwiki,listDRpage)
 pagecible.put(listDRtext,"Mise à jour des fichiers Commons proposés à la suppression")
+
+files = []
+for (dirpath, dirnames, filenames) in os.walk(cachePath):
+    files.extend(filenames)
+    break
+
+print("Suppression des fichiers cache devenus inutiles")
+for file in files:
+	if file not in listeCaches:
+		print(cachePath+file)
+		os.remove(cachePath+file)
