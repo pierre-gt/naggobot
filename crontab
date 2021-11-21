@@ -1,0 +1,52 @@
+# Edit this file to introduce tasks to be run by cron.
+#
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+#
+# To define the time you can provide concrete values for
+# minute (m), hour (h), day of month (dom), month (mon),
+# and day of week (dow) or use '*' in these fields (for 'any').
+#
+# Notice that tasks will be started based on the cron's system
+# daemon's notion of time and timezones.
+#
+# Output of the crontab jobs (including errors) is sent through
+# email to the user the crontab file belongs to (unless redirected).
+#
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+#
+# For more information see the manual pages of crontab(5) and cron(8)
+#
+# Wikimedia Toolforge specific note:
+#   Please be aware that *only* jsub and jstart are acceptable
+#   commands to schedule via cron.  Any command specified here will
+#   be modified to be invoked through jsub unless it is one of
+#   the two.
+#
+# m	h	dom	mon	dow	command
+DATEVAR=date +%Y%m%d
+*/5	*	*	*	*	jsub -N vandalisme_$($DATEVAR) -quiet python3 ~/naggobot/vandalisme.py
+*/15	*	*	*	*	jsub -N sport_$($DATEVAR) -quiet python3 ~/naggobot/sport.py
+45	*	*	*	*	jsub -N suivi_lien_page_sup_$($DATEVAR) -quiet python3 ~/naggobot/suivi_lien_page_sup.py
+10	3	*	*	*	jsub -N sport_archive_$($DATEVAR) -quiet python3 ~/naggobot/sport_archive.py
+0	3	*	*	*	jsub -N blanchiment_aac_$($DATEVAR) -quiet python3 ~/naggobot/blanchiment_aac.py
+0	4	*	*	*	jsub -N blanchiment_lann_$($DATEVAR) -quiet python3 ~/naggobot/blanchiment_lann.py
+30 	*/12	*	*	*	jsub -N suivi_pas_$($DATEVAR) -quiet python3 ~/naggobot/paspw.py
+30	10,16,22	*	*	*	jsub -N suivi_pas_test_$($DATEVAR) -quiet python3 ~/naggobot/paspw.py test
+20	*/4	*	*	*	jsub -N comdr_$($DATEVAR) -quiet -once python3 ~/naggobot/comdr.py
+0	5	*	*	*	jsub -N com_remove_section_$($DATEVAR) -quiet -once python3 ~/naggobot/com_remove_section.py
+
+55	21,22	*	*	*	[ "$(TZ=Europe/Berlin date +\%H)" = "23" ] && jsub -N stats_bistro_$($DATEVAR) -quiet python3 ~/zerobot/pywikibot/stats_bistro.py
+30	1,2	*	*	*	[ "$(TZ=Europe/Berlin date +\%H)" = "03" ] && jsub -N afd_$($DATEVAR) -quiet python3 ~/zerobot/pywikibot/afd.py -afdlist
+30	2,3	*	*	*	[ "$(TZ=Europe/Berlin date +\%H)" = "04" ] && jsub -N sysop_archives_v1_$($DATEVAR) -quiet python3 ~/zerobot/pywikibot/sysops_archives.py 
+40	2,3	*	*	*	[ "$(TZ=Europe/Berlin date +\%H)" = "04" ] && jsub -N sysop_archives_v2_$($DATEVAR) -quiet python3 ~/zerobot/pywikibot/sysops_archives_new.py 
+50	2,3	*	*	*	[ "$(TZ=Europe/Berlin date +\%H)" = "04" ] && jsub -N sysop_archives_v3_$($DATEVAR) -quiet python3 ~/zerobot/pywikibot/sysops_archives_renew.py 
+0	1,2	*	*	*	[ "$(TZ=Europe/Berlin date +\%H)" = "03" ] && jsub -N recreation_$($DATEVAR) -quiet python3 ~/zerobot/pywikibot/recreation.py --prefix 'Utilisateur:ZéroBot/Journal_des_recréations'
+30	0,1	*	*	*	[ "$(TZ=Europe/Berlin date +\%H)" = "02" ] && jsub -N bistro_$($DATEVAR) -quiet python3 ~/zerobot/pywikibot/bistro.py
+20	2	*	*	1	jsub -N modeles_sans_date_$($DATEVAR) -quiet python3 ~/zerobot/pywikibot/modeles_sans_date.py
+40	4	*	*	*	jsub -N hotarticles_$($DATEVAR) -quiet python3 ~/zerobot/pywikibot/hotarticles.py
+
+0	2	*	*	*	jsub -N archive -quiet ~/archive.sh
