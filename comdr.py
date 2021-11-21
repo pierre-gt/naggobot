@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 import pywikibot, mwparserfromhell
 import hashlib, os
+import pathlib
+
 from remove_obsolete_sections import remove_obsolete_sections
 cachePath='/home/naggobot/naggov3/.drcache/'
+pathlib.Path(cachePath).mkdir(parents=True, exist_ok=True)
 listeCaches=set()
 commons=pywikibot.Site('commons','commons')
 frwiki=pywikibot.Site('fr')
