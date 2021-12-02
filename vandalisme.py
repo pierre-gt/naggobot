@@ -72,6 +72,14 @@ def recupereUsersContrib(line):
   print(users)
   return users
 
+def is_ip_or_range(user):
+  if pywikibot.tools.is_ip_address(user):
+    return True
+  if user.count('/') == 1:
+    if pywikibot.tools.is_ip_address(user.split('/')[0]) and user.split('/')[1].isnumeric():
+      return True
+  return False
+
 def getUsersBlocks(users, site):
   comm=""
   global delai, attente, utc_offset
@@ -85,11 +93,13 @@ def getUsersBlocks(users, site):
     user=user.replace(u"\u200F","")
     user=user.replace(u"1=","")
     # Si adresse IPV6 : ne marche qu'en majuscules
-    if pywikibot.tools.is_ip_address(user):
-        print("IP address : %s" % user)
+    if is_ip_or_range(user):
+      print("IP address : %s" % user)
+      try:
         blocks+= site.blocks(iprange=user.upper(), total=1, starttime=fin_utc.isoformat(), endtime=debut_utc.isoformat())
-    else:	
-        blocks+= site.blocks(users=user, total=1, starttime=fin_utc.isoformat(), endtime=debut_utc.isoformat())
+      except Exception as e:
+        print("Erreur : Impossible de récupérer la liste des blocages pour l'IP %s" % user, e)
+    blocks+= site.blocks(users=user, total=1, starttime=fin_utc.isoformat(), endtime=debut_utc.isoformat())
     props = ("id", "by", "timestamp", "expiry", "reason")
   # deduplication
   for bl in [dict(s) for s in set(frozenset(d.items()) for d in blocks)]:
