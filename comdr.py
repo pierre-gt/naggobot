@@ -69,7 +69,7 @@ def articles(catDR, type):
 		usages, deleteTemplate, dejaTraite = findusage(page, type)
 		if usages is not None and len(usages) > 0:
 			i+=1
-			print(page, usages, end=' ')
+			print(page, len(usages), end=' ')
 			cheminImage=str(page).replace('commons','')
 			image=cheminImage.replace('[[:','[[').replace(']]','|100px]]')
 			# TODO peut-être overkill ?
@@ -122,7 +122,7 @@ def parseTemplate(deleteTemplate, type):
 	if deleteTemplate is not None:
 		if type == "DR":
 			if deleteTemplate.has('reason'):
-				print("motif : " + str(deleteTemplate.get('reason').value))
+				#print("motif : " + str(deleteTemplate.get('reason').value))
 				motif = str(deleteTemplate.get('reason').value)
 				motif = motif.replace('{{','{{m|').replace('[[COM:','[[:c:COM:')
 				motif = motif.replace('[[Category:','[[:Category:')
