@@ -3,7 +3,7 @@ import pywikibot, mwparserfromhell
 import hashlib, os
 import pathlib
 
-from remove_obsolete_sections import remove_obsolete_sections
+from remove_obsolete_sections import remove_obsolete_sections, archive_commons
 cachePath='/data/project/naggobot/naggobot/.drcache/'
 pathlib.Path(cachePath).mkdir(parents=True, exist_ok=True)
 listeCaches=set()
@@ -104,9 +104,11 @@ def articles(catDR, type):
 					if talkPage.exists():
 						textTalkPage=talkPage.get()
 						wikicode = mwparserfromhell.parser.Parser().parse(textTalkPage, skip_style_tags=True)
-						aSauver = remove_obsolete_sections(wikicode, commons)
+						aSauver, archive = remove_obsolete_sections(wikicode, commons)
 						if aSauver:
-							textTalkPage=str(wikicode)
+							textTalkPage = str(wikicode)
+							archive_commons(frwiki, talkPage, archive)
+
 					else:
 						textTalkPage=""
 					# ajout d'un message sur la page de discussion associée
