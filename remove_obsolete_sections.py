@@ -45,7 +45,7 @@ def remove_obsolete_sections(wikicode, commons):
 def archive_commons(site, talkPage, texte):
     page_archive = pywikibot.Page(site, talkPage.title()+"/Archive Commons")
     if page_archive.exists():
-        texteArchive=page_archive.get()+"\n"+texte
+        texteArchive=page_archive.get()+"\n\n"+texte
     else:
         texteArchive=texte
     page_archive.put(texteArchive, "Archivage des demandes de suppression Commons")
