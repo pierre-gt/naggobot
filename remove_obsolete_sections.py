@@ -49,3 +49,8 @@ def archive_commons(site, talkPage, texte):
     else:
         texteArchive=texte
     page_archive.put(texteArchive, "Archivage des demandes de suppression Commons")
+    if texte.count("Discussion utilisateur") != texte.count("Discussion utilisateur:NaggoBot") or texte.count("{{") != (texte.count("{{Fichier proposé")+texte.count("{{m|")) or texte.count("== ") != (texte.count("== Fichier proposé")+texte.count("== Fichiers proposés")):
+        print("Page à vérifier : %s" % page_archive.title())
+        page_verif=pywikibot.Page(site, "Utilisateur:NaggoBot/Vérification Archive Commons")
+        texte_verif = page_verif.get()+"\n# [[%s]]" % page_archive.title()
+        page_verif.put(texte_verif, "Page à vérifier : [[%s]]" % page_verif.title(), asynchronous=True)
