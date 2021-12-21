@@ -53,4 +53,4 @@ def archive_commons(site, talkPage, texte):
         print("Page à vérifier : %s" % page_archive.title())
         page_verif=pywikibot.Page(site, "Utilisateur:NaggoBot/Vérification Archive Commons")
         texte_verif = page_verif.get()+"\n# [[%s]]" % page_archive.title()
-        page_verif.put(texte_verif, "Page à vérifier : [[%s]]" % page_verif.title(), asynchronous=True)
+        page_verif.put(texte_verif, "Page à vérifier : [[%s]]" % page_archive.title(), asynchronous=True)
