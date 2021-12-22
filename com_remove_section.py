@@ -3,6 +3,8 @@ import pywikibot
 import mwparserfromhell
 import difflib
 from remove_obsolete_sections import remove_obsolete_sections, archive_commons
+from pywikibot.pagegenerators import GeneratorFactory
+limit=500
 commons = pywikibot.Site('commons', 'commons')
 frwiki = pywikibot.Site('fr')
 
@@ -28,13 +30,20 @@ def traiteArticles(articles):
                     str(wikicode), "Retrait et archivage des annonces de demande de suppression Commons obsolètes", asynchronous=True)
                 i += 1
                 archive_commons(frwiki, article, archive)
-            if i > 100:
-                print("500 pages modifiées : arrêt")
+            if i >= limit:
+                print("%d pages modifiées : arrêt" % limit)
                 break
 
 nomCateg = "Catégorie:Page contenant un fichier proposé à la suppression sur Commons"
 categ = pywikibot.Category(frwiki, nomCateg)
 traiteArticles(categ.articles())
-nomModele = "Modèle:Fichier proposé à la suppression sur Commons"
-pageModele = pywikibot.Page(frwiki, nomModele)
-traiteArticles(pageModele.getReferences(namespaces=1, only_template_inclusion=True))
+
+gen_factory = GeneratorFactory()
+args=["-ns:1", '''-search:insource:"fichier proposé à la suppression" -intitle:"Archive Commons" -incategory:"Page contenant un fichier proposé à la suppression sur Commons"''']
+for arg in args:
+    print(arg)
+    gen_factory.handle_arg(arg)
+gen = gen_factory.getCombinedGenerator()
+if gen:
+    traiteArticles(gen)
+
