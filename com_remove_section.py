@@ -4,7 +4,7 @@ import mwparserfromhell
 import difflib
 from remove_obsolete_sections import remove_obsolete_sections, archive_commons
 from pywikibot.pagegenerators import GeneratorFactory
-limit=150
+limit=500
 commons = pywikibot.Site('commons', 'commons')
 frwiki = pywikibot.Site('fr')
 
@@ -36,7 +36,7 @@ def traiteArticles(articles):
 
 nomCateg = "Catégorie:Page contenant un fichier proposé à la suppression sur Commons"
 categ = pywikibot.Category(frwiki, nomCateg)
-#traiteArticles(categ.articles())
+traiteArticles(categ.articles())
 
 gen_factory = GeneratorFactory()
 args=["-ns:1", '''-search:insource:"fichier proposé à la suppression" -intitle:"Archive Commons" -incategory:"Page contenant un fichier proposé à la suppression sur Commons"''']
