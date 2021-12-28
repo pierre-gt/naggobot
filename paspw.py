@@ -211,7 +211,7 @@ for line in lines:
                     deuxoumoins5j+= "\n<br/> Liste tronquée à %d éléments.\n" % ( nb_limite_bistro ) 
             tableau+="""\n|----
  ! scope="row" | %s
- | %s || %d || %d || %d ||%d""" % (line[1:].split("}}")[0]+"}}" + line.split("}}")[1][:50], datepas.strip(), conserver, supprimer, fusionner, totalavis)
+ | %s || %d || %d || %d ||%d""" % (line.lstrip(" *").split("}}")[0]+"}}" + line.split("}}")[1][:50], datepas.strip(), conserver, supprimer, fusionner, totalavis)
 tableau+="\n|}"
 textenaggo+="\n==Trois avis ou moins==\n"+troisoumoins
 textenaggo+="\n==Tableau==\n"+tableau
