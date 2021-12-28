@@ -25,6 +25,7 @@ def remove_obsolete_sections(wikicode, commons):
                     archive = replace_section(archive, section)
                     print("section 2" + str(section))
                     print(chemin, " n'existe plus : on retire la section")
+                    break
                 else:
                     for categCommons in fichierCommons.categories():
                         title = categCommons.title()
@@ -60,6 +61,7 @@ def replace_section(archive, section):
         if lines_conserver[-3] != '':
             lines_conserver += ['']
     if len(lines_archive)>0:
+        print("Achivage:", lines_archive)
         lines_archive += ['']
         if lines_archive[-2] != '':
             lines_archive += ['']
