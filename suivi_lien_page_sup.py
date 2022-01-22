@@ -67,6 +67,7 @@ for l in pywikibot.site.logevents(site, action="delete/delete", logtype="delete"
     modeledebut=""
     modelefin=""
     couleur=""
+    trouve=False
     if "Redirection" in l.comment() or "redirection" in l.comment():
         couleur="Vert"
     if "Discussion" in l.comment() and "/Suppression" in l.comment():
@@ -77,6 +78,7 @@ for l in pywikibot.site.logevents(site, action="delete/delete", logtype="delete"
     i=0
     length=-1
     for lien in backlinks:
+        trouve=True
         if i==0:
             texte_rapport+="\n* [[Spécial:Pages liées/%s|Pages contenant un lien]] vers [[%s]] , supprimée le %s par %s avec %sle commentaire %s%s :" % (titre, titre, l.timestamp(), l.user(), modeledebut,modelefin,l.comment() )
         if i==10:
@@ -89,6 +91,7 @@ for l in pywikibot.site.logevents(site, action="delete/delete", logtype="delete"
     backlinks=page.backlinks(namespaces=10)
     i=0
     for lien in backlinks:
+        trouve=True
         if i==0:
             texte_rapport += "\n* Modèles contenant un lien vers [[%s]] :" % titre
         if i==10:
@@ -100,6 +103,10 @@ for l in pywikibot.site.logevents(site, action="delete/delete", logtype="delete"
         i+=1
     if couleur=="Vert":
         texte_redir+=texte_rapport
+        if trouve:
+            moves=site.logevents(page=page.title(), logtype='move', total=1)
+            for move in moves:
+                texte_redir+="\n** [[%s]] déplacé vers [[%s]] par %s le %s avec le commentaire : %s" % (titre, move.data["params"]["target_title"], move.data["user"], move.data["timestamp"],move.data["comment"])
     elif couleur=="Rouge":
         texte_pas+=texte_rapport
     else:
