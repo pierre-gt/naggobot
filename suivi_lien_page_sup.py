@@ -112,6 +112,9 @@ for l in pywikibot.site.logevents(site, action="delete/delete", logtype="delete"
                 if (not pagedest.exists()):
                     for dest_delete in pywikibot.site.logevents(site, action="delete/delete", logtype="delete", total=5, page=pagedest):
                         texte_redir+="\n*** [[%s]] supprimé par %s le %s avec le commentaire : %s" % (dest_title, dest_delete.user(), dest_delete.timestamp(), dest_delete.comment())
+                for move2 in site.logevents(page=dest_title, logtype='move', total=10):
+                    texte_redir+="\n*** [[%s]] déplacé vers [[%s]] par %s le %s avec le commentaire : %s" % (dest_title, move2.data["params"]["target_title"], move2.data["user"], move2.data["timestamp"],move2.data["comment"])
+
     elif couleur=="Rouge":
         texte_pas+=texte_rapport
     else:
