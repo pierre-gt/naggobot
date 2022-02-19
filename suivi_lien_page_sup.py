@@ -70,7 +70,7 @@ for l in pywikibot.site.logevents(site, action="delete/delete", logtype="delete"
     trouve=False
     if "Redirection" in l.comment() or "redirection" in l.comment():
         couleur="Vert"
-    if "Discussion" in l.comment() and "/Suppression" in l.comment():
+    if "Discussion" in l.comment() and ("/Suppression" in l.comment() or "/Admissibilité" in l.comment()):
         couleur="Rouge"
     if couleur != "":
         modeledebut="{{%s|" % couleur

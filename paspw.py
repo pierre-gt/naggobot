@@ -39,7 +39,7 @@ def danieldize(n):
         return "seize"
     return str(n)
 
-nomDePage="Wikipédia:Pages à supprimer"
+nomDePage="Wikipédia:Débat d'admissibilité"
 limite_avis_pour_bistro=2
 limite_jours_pour_bistro=5
 nb_liste_bistro=0
@@ -55,11 +55,11 @@ troisoumoins=""
 deuxoumoins=""
 deuxoumoins5j=""
 tableau=""" {| class="wikitable alternance centre sortable"
- |+ Pages à supprimer
+ |+ Débat d'admissibilité
  |----
  ! !! scope="col" | Date !! scope="col" | Conserver !! scope="col" | Supprimer !! scope="col" | Fusionner !! scope="col" | Total des avis"""
 
-nomDePage="Wikipédia:Pages à supprimer"
+nomDePage="Wikipédia:Débat d'admissibilité"
 limite_avis_pour_bistro=2
 limite_jours_pour_bistro=5
 nb_liste_bistro=0
@@ -75,7 +75,7 @@ troisoumoins=""
 deuxoumoins=""
 deuxoumoins5j=""
 tableau=""" {| class="wikitable alternance centre sortable"
- |+ Pages à supprimer
+ |+ Débat d'admissibilité
  |----
  ! !! scope="col" | Date !! scope="col" | Conserver !! scope="col" | Supprimer !! scope="col" | Fusionner !! scope="col" | Total des avis"""
 for line in lines:
