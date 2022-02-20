@@ -105,9 +105,9 @@ for line in lines:
                 continue
             if pddi.isRedirectPage():
                 print("WARNING : redir")
-                nompdd=pddi.getRedirectTarget().toggleTalkPage().title()+"/Suppression"
+                nompdd=pddi.getRedirectTarget().toggleTalkPage().title()+"/Admissibilité"
             else:
-                nompdd=pddi.toggleTalkPage().title()+"/Suppression"
+                nompdd=pddi.toggleTalkPage().title()+"/Admissibilité"
             print("nompdd : " + nompdd)
             textenaggo+=line+"\n"
             try:
@@ -119,7 +119,7 @@ for line in lines:
             except Exception:
                 print("impossible de traiter " + lien)
                 try:
-                    nompdd="Discussion " + lien[0].lower()+lien[1:].split(":")[0]+":"+":".join(lien.split(":")[1:])+"/Suppression"
+                    nompdd="Discussion " + lien[0].lower()+lien[1:].split(":")[0]+":"+":".join(lien.split(":")[1:])+"/Admissibilité"
                     print("essai avec " + nompdd)
                     pdd=pywikibot.Page(site,nompdd)
                     if pdd.isRedirectPage():
