@@ -35,7 +35,7 @@ if True:
         if namespace is not None:
             legen.request["lenamespace"] = namespace
         if page is not None:
-            legen.request["letitle"] = page.title(withSection=False)
+            legen.request["letitle"] = page.title(with_section=False)
         if start is not None:
             legen.request["lestart"] = str(start)
         if end is not None:
