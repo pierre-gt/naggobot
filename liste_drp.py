@@ -71,14 +71,15 @@ class ListeDrp:
         page_drp=pywikibot.Page(self.frwiki, nom_page_drp)
         text=page_drp.get()
         wikicode = mwparserfromhell.parser.Parser().parse(text, skip_style_tags=True)
-        tableau_autre=""" {| class="wikitable alternance centre sortable"
-        |+ Demande de restauration en attente d'autres avis
+        modele_tableau=""" {| class="wikitable alternance centre sortable"
+        |+ %s
         |----
         ! Demande !! scope="col" | Date demande !! scope="col" | Utilisateur demande !! scope="col" | Date dernier message non sysop !! scope="col" | Dernier non sysop !! scope="col" | Date dernier message sysop !! scope="col" | Dernier sysop !! scope="col" | Délai depuis création !! scope="col" | Délai depuis dernier non sysop !! scope="col" | Délai depuis dernier sysop"""
-        tableau_attente=""" {| class="wikitable alternance centre sortable"
-        |+ Demande de restauration en attente d'informations
-        |----
-        ! Demande !! scope="col" | Date demande !! scope="col" | Utilisateur demande !! scope="col" | Date dernier message non sysop !! scope="col" | Dernier non sysop !! scope="col" | Date dernier message sysop !! scope="col" | Dernier sysop !! scope="col" | Délai depuis création !! scope="col" | Délai depuis dernier non sysop !! scope="col" | Délai depuis dernier sysop"""
+
+        tableau_autre = modele_tableau % "Demande de restauration en attente d'autres avis"
+        tableau_attente = modele_tableau % "Demande de restauration en attente d'informations"
+        tableau_vide = modele_tableau % "Demande de restauration sans statut"
+
         for section in wikicode.get_sections(levels=[2], include_lead=False):
             min_date=datetime(3000,1,1)
             max_date=datetime(1000,1,1)
@@ -135,8 +136,11 @@ class ListeDrp:
                 tableau_attente+=ajout
             if statut == "autre":
                 tableau_autre+=ajout
+            if statut == "":
+                tableau_vide+=ajout
         tableau_attente+="\n|}"
         tableau_autre+="\n|}"
+        tableau_vide+="\n|}"
         texte_page = '''== Demandes en attente d'autres avis ==
 
 Les demandes de restauration dans ce tableau attendent des avis supplémentaires de la part d'admin.
@@ -147,7 +151,13 @@ Les demandes de restauration dans ce tableau attendent des avis supplémentaires
 
 Les demandes dans ce tableau sont en attente d'éléments supplémentaires de la part de la personne ayant fait la demande (sources supplémentaires, brouillon publiable ...)
 
-%s''' % (tableau_autre, tableau_attente)
+%s
+
+== Demandes sans statut ==
+
+Les demandes dans ce tableau n'ont pas encore eu un statut attribué
+
+%s''' % (tableau_autre, tableau_attente, tableau_vide)
         pageNaggo = pywikibot.Page(self.frwiki, "Utilisateur:NaggoBot/Suivi des demandes de restauration de page")
         pageNaggo.put(texte_page, "Suivi des DRP")
 
