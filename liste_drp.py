@@ -74,7 +74,7 @@ class ListeDrp:
         modele_tableau=""" {| class="wikitable alternance centre sortable"
         |+ %s
         |----
-        ! Demande !! scope="col" | Date demande !! scope="col" | Utilisateur demande !! scope="col" | Date dernier message non sysop !! scope="col" | Dernier non sysop !! scope="col" | Date dernier message sysop !! scope="col" | Dernier sysop !! scope="col" | Délai depuis création !! scope="col" | Délai depuis dernier non sysop !! scope="col" | Délai depuis dernier sysop"""
+        ! Demande !! scope="col" | Date demande !! scope="col" | Utilisateur demande !! scope="col" | Date dernier message non sysop !! scope="col" | Dernier non sysop !! scope="col" | Date dernier message sysop !! scope="col" | Dernier sysop !! scope="col" | Délai depuis création !! scope="col" | Délai depuis dernier non sysop !! scope="col" | Délai depuis dernier sysop !! scope="col" | taille"""
 
         tableau_autre = modele_tableau % "Demande de restauration en attente d'autres avis"
         tableau_attente = modele_tableau % "Demande de restauration en attente d'informations"
@@ -131,10 +131,10 @@ class ListeDrp:
                 max_user=max_user[0:14]+'...'
             ajout="""\n|----
  ! scope="row" | %s
- | %s ||  %s || %s ||%s ||%s || %s || %s || %s ||%s""" % ( lien_drp, min_date.date(), min_user, max_date.date(), max_user, max_date_sysop.date(), max_user_sysop, delai_premier, delai_dernier, delai_dernier_sysop)
+ | %s ||  %s || %s ||%s ||%s || %s || %s || %s ||%s||%d""" % ( lien_drp, min_date.date(), min_user, max_date.date(), max_user, max_date_sysop.date(), max_user_sysop, delai_premier, delai_dernier, delai_dernier_sysop, len(str(section)))
             if statut == "attente":
                 tableau_attente+=ajout
-            if statut == "autre":
+            if statut == "autre" or statut == "autreavis":
                 tableau_autre+=ajout
             if statut == "":
                 tableau_vide+=ajout
