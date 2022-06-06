@@ -38,6 +38,7 @@ DATEVAR=date +%Y%m%d
 30	10,16,22	*	*	*	jsub -N suivi_pas_test_$($DATEVAR) -quiet python3 ~/naggobot/paspw.py test
 20	*/4	*	*	*	jsub -N comdr_$($DATEVAR) -quiet -once python3 ~/naggobot/comdr.py
 0	5	*	*	*	jsub -N com_remove_section_$($DATEVAR) -quiet -once python3 ~/naggobot/com_remove_section.py
+55	*/4	*	*	*	jsub -N liste_drp_$($DATEVAR) -quiet -once python3 ~/naggobot/liste_drp.py
 
 55	21,22	*	*	*	[ "$(TZ=Europe/Berlin date +\%H)" = "23" ] && jsub -N stats_bistro_$($DATEVAR) -quiet python3 ~/zerobot/pywikibot/stats_bistro.py
 30	1,2	*	*	*	[ "$(TZ=Europe/Berlin date +\%H)" = "03" ] && jsub -N afd_$($DATEVAR) -quiet python3 ~/zerobot/pywikibot/afd.py -afdlist
@@ -46,7 +47,8 @@ DATEVAR=date +%Y%m%d
 50	2,3	*	*	*	[ "$(TZ=Europe/Berlin date +\%H)" = "04" ] && jsub -N sysop_archives_v3_$($DATEVAR) -quiet python3 ~/zerobot/pywikibot/sysops_archives_renew.py 
 0	1,2	*	*	*	[ "$(TZ=Europe/Berlin date +\%H)" = "03" ] && jsub -N recreation_$($DATEVAR) -quiet python3 ~/zerobot/pywikibot/recreation.py --prefix 'Utilisateur:ZéroBot/Journal_des_recréations'
 30	0,1	*	*	*	[ "$(TZ=Europe/Berlin date +\%H)" = "02" ] && jsub -N bistro_$($DATEVAR) -quiet python3 ~/zerobot/pywikibot/bistro.py
-20	2	*	*	1	jsub -N modeles_sans_date_$($DATEVAR) -quiet python3 ~/zerobot/pywikibot/modeles_sans_date.py
+20	2	*	*	1	jsub -N modeles_sans_date_$($DATEVAR) -quiet python3 ~/zerobot/pywikibot/modeles_sans_dates.py
 40	4	*	*	*	jsub -N hotarticles_$($DATEVAR) -quiet python3 ~/zerobot/pywikibot/hotarticles.py
+0	*/2	*	*	*	jsub -N drp_warn_$($DATEVAR) -quiet python3 ~/zerobot/pywikibot/drp_warn.py
 
 0	2	*	*	*	jsub -N archive -quiet ~/archive.sh
