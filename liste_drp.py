@@ -141,7 +141,9 @@ class ListeDrp:
         tableau_attente+="\n|}"
         tableau_autre+="\n|}"
         tableau_vide+="\n|}"
-        texte_page = '''== Demandes en attente d'autres avis ==
+        texte_page = '''{{Wikipédia:Demande de restauration de page/Onglets}}
+
+== Demandes en attente d'autres avis ==
 
 Les demandes de restauration dans ce tableau attendent des avis supplémentaires de la part d'admin.
 
@@ -158,7 +160,7 @@ Les demandes dans ce tableau sont en attente d'éléments supplémentaires de la
 Les demandes dans ce tableau n'ont pas encore eu un statut attribué
 
 %s''' % (tableau_autre, tableau_attente, tableau_vide)
-        pageNaggo = pywikibot.Page(self.frwiki, "Utilisateur:NaggoBot/Suivi des demandes de restauration de page")
+        pageNaggo = pywikibot.Page(self.frwiki, "Wikipédia:Demande de restauration de page/Suivi")
         pageNaggo.put(texte_page, "Suivi des DRP")
 
 
