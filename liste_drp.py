@@ -144,7 +144,7 @@ class ListeDrp:
         texte_page = '''{{Wikipédia:Demande de restauration de page/Onglets}}
 
 == Demandes en attente d'autres avis ==
-
+{{raccourci|WP:DRP/SV}}
 Les demandes de restauration dans ce tableau attendent des avis supplémentaires de la part d'admin.
 
 %s
