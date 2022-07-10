@@ -99,7 +99,7 @@ class ListeDrp:
                     date_msg=str(template.get(2))
                     (min_date, max_date, min_user, max_user, max_date_sysop, max_user_sysop) = self.calcule_date(min_date, max_date, min_user, max_user, user, date_msg, max_date_sysop, max_user_sysop)
 
-            modeles_discussion=["Discussion utilisateur:", "user talk:"]
+            modeles_discussion=["Discussion utilisateur:","Discussion utilisatrice:", "user talk:"]
             for line in str(section).split("\n"):
                 for modele in modeles_discussion:
                     pos = line.lower().find(modele.lower())
