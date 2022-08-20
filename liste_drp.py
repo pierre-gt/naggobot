@@ -122,6 +122,8 @@ class ListeDrp:
             titre_section_MediaWiki = titre_section_MediaWiki.replace("[[", "")
             titre_section_MediaWiki = titre_section_MediaWiki.replace("]]", "")
             texte_lien = titre_section_MediaWiki
+            if len(texte_lien)>60:
+                texte_lien = texte_lien[0:60]+"..."
             titre_section_MediaWiki = urllib.parse.quote(titre_section_MediaWiki.encode('utf-8'), safe=" /").replace(" ", "_").replace("%", ".")
 
             lien_drp = "[[%s#%s|%s]]" % (page_drp.title(as_link = False), titre_section_MediaWiki, texte_lien)
