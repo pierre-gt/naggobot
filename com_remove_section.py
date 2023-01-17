@@ -4,7 +4,7 @@ import mwparserfromhell
 import difflib
 from remove_obsolete_sections import remove_obsolete_sections, archive_commons
 from pywikibot.pagegenerators import GeneratorFactory
-limit=500
+limit=5000
 commons = pywikibot.Site('commons', 'commons')
 frwiki = pywikibot.Site('fr')
 
