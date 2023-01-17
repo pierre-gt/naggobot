@@ -95,9 +95,12 @@ class ListeDrp:
                 if template.has('statut'):
                     statut=template.get('statut').split('=')[1]
                 if template.name=="non signé":
-                    user=template.get(1)
-                    date_msg=str(template.get(2))
-                    (min_date, max_date, min_user, max_user, max_date_sysop, max_user_sysop) = self.calcule_date(min_date, max_date, min_user, max_user, user, date_msg, max_date_sysop, max_user_sysop)
+                    try:
+                        user=template.get(1)
+                        date_msg=str(template.get(2))
+                        (min_date, max_date, min_user, max_user, max_date_sysop, max_user_sysop) = self.calcule_date(min_date, max_date, min_user, max_user, user, date_msg, max_date_sysop, max_user_sysop)
+                    except Exception as e:
+                        print("erreur dans le modèle non signé:", e)
 
             modeles_discussion=["Discussion utilisateur:","Discussion utilisatrice:", "user talk:"]
             for line in str(section).split("\n"):
