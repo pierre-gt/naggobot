@@ -1,0 +1,119 @@
+- name: vandalisme
+  image: python3.11
+  command: ~/runjob ~/naggobot/vandalisme.py
+  emails: onfailure
+  schedule: "*/5     *       *       *       *"
+#
+- name: sport
+  image: python3.11
+  command: ~/runjob ~/naggobot/sport.py
+  emails: onfailure
+  schedule: "*/15     *       *       *       *"
+#
+- name: suivi-page-sup
+  image: python3.11
+  command: ~/runjob ~/naggobot/suivi_lien_page_sup.py
+  emails: onfailure
+  schedule: "45     *       *       *       *"
+#
+- name: sport-archive
+  image: python3.11
+  command: ~/runjob ~/naggobot/sport_archive.py
+  emails: onfailure
+  schedule: "10     3       *       *       *"
+#
+- name: blanchiment-aac
+  image: python3.11
+  command: ~/runjob ~/naggobot/blanchiment_aac.py
+  emails: onfailure
+  schedule: "0     3       *       *       *"
+#
+- name: blanchiment-lann
+  image: python3.11
+  command: ~/runjob ~/naggobot/blanchiment_lann.py
+  emails: onfailure
+  schedule: "0     4       *       *       *"
+#
+- name: suivi-pas
+  image: python3.11
+  command: ~/runjob ~/naggobot/paspw.py
+  emails: onfailure
+  schedule: "30    10,16,22       *       *       *"
+#
+- name: comdr
+  image: python3.11
+  command: ~/runjob ~/naggobot/comdr.py
+  emails: onfailure
+  schedule: "20    */4       *       *       *"
+#
+- name: liste-drp
+  image: python3.11
+  command: ~/runjob ~/naggobot/liste_drp.py
+  emails: onfailure
+  schedule: "55    */4       *       *       *"
+#
+- name: comdr-section
+  image: python3.11
+  command: ~/runjob ~/naggobot/com_remove_section.py
+  emails: onfailure
+  schedule: "0    5       *       *       *"
+#
+- name: stats-bistro
+  image: python3.11
+  command: ~/runjobtime 23 ~/zerobot/pywikibot/stats_bistro.py
+  emails: onfailure
+  schedule: "55   21,22       *       *       *"
+#
+- name: afd
+  image: python3.11
+  command: ~/runjobtime 03 ~/zerobot/pywikibot/afd.py -afdlist
+  emails: onfailure
+  schedule: "30   1,2       *       *       *"
+#
+- name: sysop-archives-1
+  image: python3.11
+  command: ~/runjobtime 04 ~/zerobot/pywikibot/sysops_archives.py
+  emails: onfailure
+  schedule: "30   2,3       *       *       *"
+#
+- name: sysop-archives-2
+  image: python3.11
+  command: ~/runjobtime 04 ~/zerobot/pywikibot/sysops_archives_new.py
+  emails: onfailure
+  schedule: "40   2,3       *       *       *"
+#
+- name: sysop-archives-3
+  image: python3.11
+  command: ~/runjobtime 04 ~/zerobot/pywikibot/sysops_archives_renew.py
+  emails: onfailure
+  schedule: "50   2,3       *       *       *"
+#
+- name: recreation
+  image: python3.11
+  command: ~/runjobtime 03 ~/zerobot/pywikibot/recreation.py --prefix 'Utilisateur:ZéroBot/Journal_des_recréations'
+  emails: onfailure
+  schedule: "0   1,2       *       *       *"
+#
+- name: init-bistro
+  image: python3.11
+  command: ~/runjobtime 02 ~/zerobot/pywikibot/bistro.py
+  emails: onfailure
+  schedule: "30   0,1       *       *       *"
+#
+- name: modeles
+  image: python3.11
+  command: ~/runjob ~/zerobot/pywikibot/modeles_sans_dates.py
+  emails: onfailure
+  schedule: "20   2       *       *       *"
+#
+- name: hot-articles
+  image: python3.11
+  command: ~/runjob ~/zerobot/pywikibot/hotarticles.py
+  emails: onfailure
+  schedule: "40   4       *       *       *"
+#
+- name: drp-warn
+  image: python3.11
+  command: ~/runjob ~/zerobot/pywikibot/drp_warn.py
+  emails: onfailure
+  schedule: "0   */2       *       *       *"
