@@ -3,24 +3,28 @@
   command: ~/runjob ~/naggobot/vandalisme.py
   emails: onfailure
   schedule: "*/5     *       *       *       *"
+  retry: 1
 #
 - name: sport
   image: python3.11
   command: ~/runjob ~/naggobot/sport.py
   emails: onfailure
   schedule: "*/15     *       *       *       *"
+  retry: 1
 #
 - name: suivi-page-sup
   image: python3.11
   command: ~/runjob ~/naggobot/suivi_lien_page_sup.py
   emails: onfailure
   schedule: "45     *       *       *       *"
+  retry: 2
 #
 - name: sport-archive
   image: python3.11
   command: ~/runjob ~/naggobot/sport_archive.py
   emails: onfailure
   schedule: "10     3       *       *       *"
+  retry: 2
 #
 - name: blanchiment-aac
   image: python3.11
@@ -63,6 +67,7 @@
   command: ~/runjobtime 23 ~/zerobot/pywikibot/stats_bistro.py
   emails: onfailure
   schedule: "55   21,22       *       *       *"
+  retry: 3
 #
 - name: afd
   image: python3.11
@@ -75,30 +80,34 @@
   command: ~/runjobtime 04 ~/zerobot/pywikibot/sysops_archives.py
   emails: onfailure
   schedule: "30   2,3       *       *       *"
+  retry: 2
 #
 - name: sysop-archives-2
   image: python3.11
   command: ~/runjobtime 04 ~/zerobot/pywikibot/sysops_archives_new.py
   emails: onfailure
   schedule: "40   2,3       *       *       *"
+  retry: 2
 #
 - name: sysop-archives-3
   image: python3.11
   command: ~/runjobtime 04 ~/zerobot/pywikibot/sysops_archives_renew.py
   emails: onfailure
   schedule: "50   2,3       *       *       *"
+  retry: 2
 #
 - name: recreation
   image: python3.11
-  command: ~/runjobtime 03 ~/zerobot/pywikibot/recreation.py --prefix 'Utilisateur:ZéroBot/Journal_des_recréations'
+  command: ~/runjob ~/zerobot/pywikibot/recreation.py --prefix 'Utilisateur:ZéroBot/Journal_des_recréations'
   emails: onfailure
-  schedule: "0   1,2       *       *       *"
+  schedule: "0   2       *       *       *"
 #
 - name: init-bistro
   image: python3.11
   command: ~/runjobtime 02 ~/zerobot/pywikibot/bistro.py
   emails: onfailure
   schedule: "30   0,1       *       *       *"
+  retry: 1
 #
 - name: modeles
   image: python3.11
