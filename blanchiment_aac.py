@@ -3,7 +3,7 @@ import pywikibot, time, datetime
 site = pywikibot.Site('fr')
 # on recherche toutes les pages qui comment par Wikipédia:Appel à commentaires/Utilisateur ou Article
 # dans l'espace Wikipédia: uniquement
-for commentaire in ['Utilisateur','Article']:
+for commentaire in ['Utilisateur']:
   for ref in site.allpages(prefix="Appel à commentaires/%s/" % commentaire, namespace=4):
     if ref.isRedirectPage():
       continue
